@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: myCustomeFont;
+    src: url(Poppins/Poppins-Bold.ttf);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+#headerTop{
+    display: flex;
+    align-items: center;
+}
+
+.headerLeft, #logo, #userPanel{
+    flex: 1;
+}
+
+#logo{
+    text-align: center;
+    margin-left: 50px;
+}
+
+#logo img{
+    margin: 5px;
+    height: 150px;
+    width: auto;
+}
+
+#userPanel{
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-right: 80px;
+    color: #0e4e8f;
+    font-size: 18px;
+}
+
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button a{
+    text-decoration: none;
+    color: #0e4e8f;
+    font-size: 18px;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+}
+
+button a:hover{
+    text-decoration: underline;
+}
+
+#navBar > ul {
+    display: flex;
+    justify-content: space-around;
+    background-color: #0e4e8f;
+    list-style: none;
+    margin: 10px;
+    padding: 12px;
+    color: white;
+    font-size: 18px;
+}
+
+#navBar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+#navBar ul li a:hover {
+    color: #fbcd19;
+    transition: 0.2s ease;
+}
+
+#navBar ul li a.active {
+    color: #fbcd19;
+}
+
+main{
+    max-width: auto;
+    margin: 10px;
+}
+
+main h1{
+    text-align: center;
+    margin: 30px;
+    color: #0e4e8f;
+
+}
+
+#orderHistoryContainer{
+    overflow-x: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #0e4e8f;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+thead{
+    background-color: white;
+    color: #0e4e8f;
+    border-bottom: #0e4e8f solid 1px;
+}
+
+th, td{
+    padding: 20px;
+    text-align: center;
+    color: #0e4e8f;
+    border: #0e4e8f solid 1px;
+}
+
+th{
+    font-weight: bold;
+}
+
+tbody tr{
+    border-bottom: 1px solid #0e4e8f;
+}
+
