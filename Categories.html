@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "author" content="Yuni Lin">
+    <link rel="stylesheet" href="Categories.css">
+    <title>Catorgory</title>
+</head>
+
+<body>
+    <header>
+        <div id="headerTop">
+            <div class="headerLeft"></div>
+            <div id="logo">
+                <img src="McNeeseLogo.png" alt="Bookstore Logo">
+            </div>
+            <div id="userPanel">
+                <span>Hello, <span id="username"></span>Johnatan</span>
+                <button><a href="Login.html">Log Out</a></button>
+            </div>
+        </div>
+        <nav id="navBar">
+            <ul>
+                <li><a href="Homepage.html">Homepage</a></li>
+                <li><a href="Categories.html" class="active">Categories</a></li>
+                <li><a href="ShoppingCart.html">Shopping Cart</a></li>
+                <li><a href="Checkout.html">Check Out</a></li>
+                <li><a href="OrderHistory.html">Order History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="categorySearch">
+
+        <div id="categoryMenu">
+            <span class="category active" onclick="setSearch('book', this)">Books</span>
+            <span class="category" onclick="setSearch('supply', this)">Supplies</span>
+        </div>
+        <h3>Search Products</h3>
+        <br/>
+        <input type="text" id="searchBar" placeholder="Enter ISBN or author name here..">
+        </div>
+    </main>
+
+    <section>
+        <h3>Product Results</h3>
+
+        <div id="productResults">
+            <article class="product">
+                <img src="books/the-algorithm-for-publ.jpg" alt="Book cover">
+                <div>
+                    <h3>Introduction to Algorithms, 4th Edition</h3>
+
+                    <p>Author: Thomas H. Cormen</p>
+                    <p>ISBN: 9780262033848</p>
+                    <p>$89.99</p>
+
+                    <button>Add to Cart</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script src="Categories.js"></script>
+</body>
