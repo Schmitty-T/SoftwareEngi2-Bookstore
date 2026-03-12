@@ -86,10 +86,6 @@ button a:hover{
 }
 
 main{
-    min-height: 100vh;
-    background-image: url(BookstoreCoverImage.png);
-    background-size: cover;
-    background-position: center;
     max-width: auto;
     margin: 10px;
 }
@@ -99,4 +95,38 @@ main h1{
     margin: 30px;
     color: #0e4e8f;
 
+}
+
+#orderHistoryContainer{
+    overflow-x: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #0e4e8f;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+thead{
+    background-color: white;
+    color: #0e4e8f;
+    border-bottom: #0e4e8f solid 1px;
+}
+
+th, td{
+    padding: 20px;
+    text-align: center;
+    color: #0e4e8f;
+    border: #0e4e8f solid 1px;
+}
+
+th{
+    font-weight: bold;
+}
+
+tbody tr{
+    border-bottom: 1px solid #0e4e8f;
 }
