@@ -60,31 +60,6 @@ button a:hover{
     text-decoration: underline;
 }
 
-#navBar > ul {
-    display: flex;
-    justify-content: space-around;
-    background-color: #0e4e8f;
-    list-style: none;
-    margin: 10px;
-    padding: 12px;
-    color: white;
-    font-size: 18px;
-}
-
-#navBar ul li a {
-    text-decoration: none;
-    color: white;
-}
-
-#navBar ul li a:hover {
-    color: #fbcd19;
-    transition: 0.2s ease;
-}
-
-#navBar ul li a.active {
-    color: #fbcd19;
-}
-
 main{
     max-width: auto;
     margin: 10px;
@@ -94,11 +69,16 @@ main h1{
     text-align: center;
     margin: 30px;
     color: #0e4e8f;
-
+    border: 1px solid #0e4e8f
 }
 
-#orderHistoryContainer{
-    overflow-x: auto;
+#EmployeeID{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #0e4e8f;
+    font-size: 18px;
+    margin-top: 10px;
 }
 
 table{
@@ -108,6 +88,21 @@ table{
     border: 1px solid #0e4e8f;
     font-size: 18px;
     margin-top: 10px;
+}
+
+.tableRow{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.Orders, .Shipments{
+    flex: 1;
+}
+
+.Orders table,
+.Shipments table{
+    width: 100%;
 }
 
 thead{

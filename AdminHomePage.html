@@ -1,26 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name = "author" content="Seth Dyer">
-    <link rel="stylesheet" href="AdminHomePage.css">
-    <title>Catorgory</title>
-</head>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="author" content="Seth Dyer">
+      <link rel="stylesheet" href="AdminHomePage.css">
+      <title>AdminHomePage</title>
+  </head>
 
-<body>
+  <body>
     <header>
         <div id="headerTop">
             <div class="headerLeft"></div>
+
             <div id="logo">
                 <img src="McNeeseLogo.png" alt="Bookstore Logo">
             </div>
+
             <div id="userPanel">
                 <span>Hello, <span id="username"></span>Johnatan</span>
                 <button><a href="Login.html">Log Out</a></button>
             </div>
         </div>
     </header>
+
     <main>
-      <h1>Welcome Johnathan</h1>
+    <h1>Admin Home Page || Welcome Johnathan</h1>
+    <div class="tableRow">
+
+        <div class="Orders">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="orderBody">
+                    <tr><td>17231</td><td>2024-05-01</td><td>Delivered</td></tr>
+                    <tr><td>3364</td><td>2024-05-15</td><td>Delivered</td></tr>
+                    <tr><td>12346</td><td>2024-06-01</td><td>Delivered</td></tr>
+                    <tr><td>34577</td><td>2024-06-01</td><td>Delivered</td></tr>
+                    <tr><td>13451</td><td>2024-06-01</td><td>Processing</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="Shipments">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Ship Date</th>
+                        <th>Vendor</th>
+                    </tr>
+                </thead>
+                <tbody id="ShipmentsBody">
+                    <tr><td>5353</td><td>2026-02-26</td><td>Pearson</td></tr>
+                    <tr><td>1263</td><td>2026-03-1</td><td>McGraw Hill</td></tr>                
+                    <tr><td>3421</td><td>2025-11-29</td><td>Sharpie</td></tr>
+                    <tr><td>9111</td><td>2025-11-28</td><td>Crayola</td></tr>               
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="EmployeeInfo">
+        <table id="EmployeeID">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Date of Birth</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody id="EmpInfoBody">
+                <tr><td>Johnathan White</td><td>1994-05-01</td><td>Stocker</td></tr>
+            </tbody>
+        </table>
+    </div>
+
     </main>
-</body>
+  </body>
+</html>
