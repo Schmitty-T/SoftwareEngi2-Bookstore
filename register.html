@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <header id="tophead">
+        <img src="McNeeseLogo.PNG" alt="McNeese Logo" class="logo">
+    </header>
+
+    <main class="main">
+        <div class="register">
+            <form id="register-form">
+                <div class="inputGroup">
+                    <label for="username">Username</label>
+                    <input type="text" id="Username" name="username" required>
+                </div>
+                
+                <div class="inputGroup email">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="inputGroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                
+                <button type="submit" class="REgister">Register</button>
+            </form>
+        </div>
+    </main>
+<script>
+
+    var registtrationForm = document.getElementById("register-form");
+
+    var password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+
+    registtrationForm.addEventListener("submit", function(e){
+
+        var pass1 = password.value;
+        var pass2 = confirmPassword.value;
+        var pass2 = confirmPassword.value;
+        
+        var passwordsMatch = false;
+
+        if(pass1 == pass2){
+            passwordsMatch = true;
+        }
+
+        if(passwordsMatch == false){
+            e.preventDefault();
+            alert("Passwords don't match. Please try again.");
+        } else {
+            alert("Registration successful!");
+        }
+
+    });
+
+</script>
+</body>
+</html>
+</body>
+</html>
