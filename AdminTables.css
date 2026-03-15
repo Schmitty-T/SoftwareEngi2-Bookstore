@@ -126,15 +126,7 @@ tbody tr{
     border-bottom: 1px solid #0e4e8f;
 }
 
-caption{
-    font-size: 22px;
-    font-weight: bold;
-    color: #0e4e8f;
-    padding: 10px;
-    text-align: center;
-}
-
-.EmpInfoButton {
+.back-link {
     position: fixed;
     bottom: 20px;
     right: 20px;
