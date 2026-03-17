@@ -85,11 +85,6 @@ button a:hover{
     color: #fbcd19;
 }
 
-#categorySearch{
-    text-align: center;
-    margin-top: 20px;
-}
-
 #categoryMenu{
     display: flex;
     justify-content: space-evenly;
@@ -98,17 +93,22 @@ button a:hover{
     border: 1px solid #0e4e8f;
     color: #0e4e8f;
     margin: 10px;
-
 }
 
 .category{
     cursor: pointer;
     padding: 10px 20px;
     position: relative;
+    color:#0e4e8f;
+    text-decoration: none;
 }
 
 .category:hover{
     color: #fbcd19;
+}
+
+.category.active{
+    color: #0e4e8f;
 }
 
 .category.active::after{
@@ -119,19 +119,6 @@ button a:hover{
     width: 100%;
     height: 3px;
     background-color: #fbcd19;
-}
-
-#categorySearch > h3{
-    color: #0e4e8f;
-    font-size: 18px;
-    padding-top: 30px;
-}
-
-#searchBar{
-    width: 500px;
-    font-size: 16px;
-    padding: 10px;
-    margin: 0 0 30px 0;
 }
 
 section{
@@ -145,24 +132,47 @@ section > h3{
     color: #0e4e8f;
 }
 
-#productResults{
+.product{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
+    align-items: flex-start;
+    border: 1px solid #0e4e8f;
+    padding: 10px;
+    width: 20%;
 }
 
 .product{
     display: flex;
     align-items: flex-start;
-    gap: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #0e4e8f;
     padding: 30px;
-    width: 500px;
+    width: 460px;
     margin: 10px;
 }
 
+#productResults{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .product img{
-    width: 120px;
-    height: auto;
+    width:120px;
+    height:160px;
+    margin:20px;
+}
+
+.addCartBtn{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #0e4e8f;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.addCartBtn:hover{
+    background-color: #0b3f74;
 }
