@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Cart Items</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel ="stylesheet" href ="cart.css">
+    </head>
+    <body>
+        <header>
+        <div id="headerTop">
+            <div class="headerLeft"></div>
+            <div id="logo">
+                <img src="McNeeseLogo.png" alt="Bookstore Logo">
+            </div>
+            <div id="userPanel">
+                <span>Hello, <span id="username"></span>Johnatan</span>
+                <button><a href="Login.html">Log Out</a></button>
+            </div>
+        </div>
+        <nav id="navBar">
+            <ul>
+                <li><a href="Homepage.html">Homepage</a></li>
+                <li><a href="Categories.html"> Categories</a></li>
+                <li><a href="cart.html" class="active">Shopping Cart</a></li>
+                <li><a href="CheckOut.html">Check Out</a></li>
+                <li><a href="OrderHistory.html">Order History</a></li>
+            </ul>
+        </nav>
+        </header>
+        
+        <main>
+            <div class="CartItemsContainer">
+                <table class="CartItemsTable">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Cart Items</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="imgcell"><img src="books/the-algorithm-for-publ.jpg" alt="Book Cover">
+                            </td>
+                            <td class="titlecell">
+                                <p>Author: Thomas H. Cormen</p>
+                                <p>ISBN: 9780262033848</p>
+                                <p>$89.99</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class = "CartItemsSumTable">
+                    <thead>
+                        <tr>
+                            <th colspan ="2">Cart Items Sum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>                            
+                            <td class="titlecell">                                
+                                <p>ISBN: 9780262033848</p>                                
+                            </td>
+                            <td><p>$89.99</p></td>
+                        </tr>
+                        <tr>                            
+                            <td class="titlecell">                                
+                                <p>Total:</p>                                
+                            </td>
+                            <td><p>$89.99</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table class="CheckoutButton">
+                <thead>
+                    <tr>
+                        <th><a href="#">Check Out</a></th>                   
+                    </tr>
+                </thead>
+                
+            </table>
+        </main>
+        
+        
+    </body>
+</html>

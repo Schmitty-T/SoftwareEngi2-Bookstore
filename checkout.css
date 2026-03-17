@@ -1,0 +1,153 @@
+
+/* 
+    Created on : Mar 11, 2026, 10:04:37 PM
+    Author     : Hcool
+*/
+@font-face{
+    font-family: myCustomeFont;
+    src: url(Poppins/Poppins-Bold.ttf);    
+}
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+#headerTop{
+    display: flex;
+    align-items: center;
+}
+.headerLeft, #logo, #userPanel{
+    flex: 1;
+}
+#logo{
+    text-align: center;
+    margin-left: 50px;
+}
+
+#logo img{
+    margin: 5px;
+    height: 150px;
+    width: auto;
+}
+#userPanel{
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-right: 80px;
+    color: #0e4e8f;
+    font-size: 18px;
+}
+
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button a{
+    text-decoration: none;
+    color: #0e4e8f;
+    font-size: 18px;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+}
+
+button a:hover{
+    text-decoration: underline;
+}
+
+#navBar > ul {
+    display: flex;
+    justify-content: space-around;
+    background-color: #0e4e8f;
+    list-style: none;
+    margin: 10px;
+    padding: 12px;
+    color: white;
+    font-size: 18px;
+}
+
+#navBar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+#navBar ul li a:hover {
+    color: #fbcd19;
+    transition: 0.2s ease;
+}
+
+#navBar ul li a.active {
+    color: #fbcd19;
+}
+.CartItemsTable{
+    width: 68%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #0e4e8f;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.CartItemsSumTable{
+    width: 26%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #0e4e8f;
+    font-size: 18px;  
+    margin-top: 10px;
+    
+}
+
+.CartItemsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items:flex-start;
+    gap: 5%;
+}
+.imgcell{
+    vertical-align: top;
+    padding-right:0px;
+}
+td img{   
+    width:100px;
+    height:auto;
+    display:block;
+}
+.titlecell{
+    text-align: left;
+    vertical-align: top;
+}
+tr th{
+    border-bottom: 1px solid #0e4e8f
+}
+.CheckoutButton{
+    position:fixed;
+    bottom:40px;
+    right:10px;
+    border-collapse: collapse;
+    background-color: #0e4e8f;
+    border: 1px solid #0e4e8f;
+    width:26%;
+}
+.CheckoutButton a{
+    color:white;
+    text-decoration: none;
+    font-size:18px;
+}
+.CheckoutButton a:hover{
+    color:gold;
+}
+.CheckoutButton{
+    height:60px;
+}
+.checkbox{
+    width:30px;
+    height:auto;
+    transform: scale(2);
+}
+
+
