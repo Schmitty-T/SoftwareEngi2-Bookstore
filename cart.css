@@ -91,14 +91,17 @@ button a:hover{
     margin-top: 10px;
     margin-left: 10px;
 }
-.CartItemsSumTable{
-    width: 26%;
+.CartItemsSumTable table{
+    width: 100%;
     border-collapse: collapse;
     background-color: white;
     border: 1px solid #0e4e8f;
-    font-size: 18px;  
-    margin-top: 10px;
+    font-size: 18px; 
     
+}
+.CartItemsSumTable{
+    width: 26%;
+    margin-top:10px;
 }
 
 .CartItemsContainer{
@@ -109,30 +112,26 @@ button a:hover{
     gap: 5%;
 }
 td img{
-    width:10%;
+    width:100px;
     height:auto;
+    padding-left: 10px;
 }
 tr th{
     border-bottom: 1px solid #0e4e8f
 }
 .CheckoutButton{
-    position:fixed;
-    bottom:40px;
-    right:10px;
     border-collapse: collapse;
     background-color: #0e4e8f;
     border: 1px solid #0e4e8f;
-    width:26%;
-}
-.CheckoutButton a{
+    width:100%;
     color:white;
     text-decoration: none;
-    font-size:18px;
-}
-.CheckoutButton a:hover{
-    color:gold;
-}
-.CheckoutButton{
+    font-size: 18px;
     height:60px;
+    margin-top: 20px;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
 }
 
+.CheckoutButton:hover{
+    color:gold;
+}
