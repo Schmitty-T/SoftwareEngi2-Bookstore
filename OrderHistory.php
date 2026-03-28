@@ -1,3 +1,18 @@
+<?php session_start();
+
+    $db = new PDO("sqlite:bookstore.db");
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+   // $userId = $_SESSION["userId"];
+   // $username = $_SESSION["username"];
+    $userId = 1; //Testing order history page
+    $username = "testuser";
+
+    $stmt = $db->prepare("SELECT * FROM Orders WHERE userId = ?");
+    $stmt->execute([$userId]);
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +39,7 @@
                 <li><a href="Homepage.html">Homepage</a></li>
                 <li><a href="Categories.php">Categories</a></li>
                 <li><a href="Cart.html">Shopping Cart</a></li>
-                <li><a href="OrderHistory.html" class="active">Order History</a></li>
+                <li><a href="OrderHistory.php" class="active">Order History</a></li>
             </ul>
         </nav>
     </header>
@@ -42,36 +57,20 @@
                     </tr>
                 </thead>
                 <tbody id="orderHistoryTableBody">
-                    <tr>
-                        <td>12345</td>
-                        <td>2024-05-01</td>
-                        <td>$29.99</td>
-                        <td>Delivered</td>
-                    </tr>
-                    <tr>
-                        <td>12346</td>
-                        <td>2024-05-15</td>
-                        <td>$15.99</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>12342</td>
-                        <td>2024-06-01</td>
-                        <td>$19.99</td>
-                        <td>Processing</td>
-                    </tr>
-                    <tr>
-                        <td>12333</td>
-                        <td>2024-06-01</td>
-                        <td>$20.99</td>
-                        <td>Processing</td>
-                    </tr>
-                    <tr>
-                        <td>12323</td>
-                        <td>2024-06-01</td>
-                        <td>$21.99</td>
-                        <td>Processing</td>
-                    </tr>
+                    <?php if (count($orders) > 0): ?>
+                        <?php foreach ($orders as $order): ?>
+                            <tr>
+                                <td><?= $order['orderId']?></td>
+                                <td><?= $order['orderDate']?></td>
+                                <td>$<?= number_format($order['total'], 2) ?></td>
+                                <td><?= $order['status']?></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4"> No order history found.</td>
+                        </tr>
+                    <?php endif;?>
                 </tbody>
             </table>
         </div>
