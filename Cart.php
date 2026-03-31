@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-        $db = new PDO("sqlite:categories.db");
+        $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
         $stmt = $db->query("SELECT * FROM Products");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,9 +60,14 @@
                                         <?php endif ?>
                                     </td>
                                     <td class="titlecell">
-                                        <p>Author:<?php echo $product['author'];?></p>
-                                        <p>ISBN:<?php echo $product['isbn'];?></p>
-                                        <p>$<?php echo $product['price'];?></p>
+                                        <?php if($product['category'] == 'book'):?>
+                                            <p>Author:<?php echo $product['author'];?></p>
+                                            <p>ISBN:<?php echo $product['isbn'];?></p>
+                                            <p>$<?php echo $product['price'];?></p>
+                                        <?php else:?>                                          
+                                            <p><?php echo $product['title'];?></p>
+                                            <p>$<?php echo $product['price'];?></p>
+                                        <?php endif ?>    
                                     </td>                    
                                     <td class = 'quantity'>
                                         <button type='button' class='button' onclick ='decrease(this)'>-</button><!-- comment -->

@@ -113,19 +113,23 @@ button a:hover{
 }
 .imgcell{
     vertical-align: top;
-    padding-right:0px;
+    padding-left:10px;
 }
 td img{   
     width:100px;
     height:auto;
-    display:block;
+    display:block;    
 }
 .titlecell{
     text-align: left;
     vertical-align: top;
 }
+
+tr:first-child td{
+    padding-top:20px;
+}
 tr th{
-    border-bottom: 1px solid #0e4e8f
+    border-bottom: 1px solid #0e4e8f;        
 }
 
 .CheckoutButton{
@@ -152,17 +156,17 @@ tr th{
 .button{
     width:30px;
     height: 30px;
-    font-size:18px;
+    font-size:24px;
     font-weight:bold;
     border:none;
-    background-color:blue;
+    background-color:#0e4e8f;
     color: white;
     border-radius: 5px;
     cursor:pointer;
 }
 
 .button:hover{
-    background-color:yellow;
+    color:yellow;
 }
 
 .input{
@@ -173,13 +177,13 @@ tr th{
 .removeButton{
     padding: 6px;
     border:none;
-    background-color:green;
-    color:yellow;
+    background-color:#0e4e8f;
+    color:white;
     border-radius:5px;
     cursor:pointer;    
 }
 .removeButton:hover{
-    background-color:red;
+    color:yellow;
 }
 
 
