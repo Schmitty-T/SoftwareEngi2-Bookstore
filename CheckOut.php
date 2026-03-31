@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-        $db = new PDO("sqlite:categories.db");
+        $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
         $stmt = $db->query("SELECT * FROM Products");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
