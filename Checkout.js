@@ -27,10 +27,12 @@ function addressPropogation(containerElement, callback, options) {
     const inputElement = document.createElement('input');
     inputElement.setAttribute('type', 'text');
     inputElement.setAttribute('placeholder', options.placeholder);
-    inputContainerElement.appendChild(inputElement);
+    inputElementContainer.appendChild(inputElement);
 
     var currItems;
     let focusedItemIndex;
+    let currTimeout;
+    let currPromiseReject;
     
 
     const MIN_ADDRESS_LENGTH = 3;
@@ -46,7 +48,7 @@ function addressPropogation(containerElement, callback, options) {
     clearButton.classList.remove("visible");
     closeDropDownList();
   });
-  inputContainerElement.appendChild(clearButton);
+  inputElementContainer.appendChild(clearButton);
 
     inputElement.addEventListener('input', function(e) {
         const currValue = this.value;
@@ -57,15 +59,15 @@ function addressPropogation(containerElement, callback, options) {
 
         if(currPromiseReject) {
             currPromiseReject({
-                canceled:true;
+                canceled: true
             });
         }
 
-        if(!currValue) || currValue.length < MIN_ADDRESS_LENGTH) {
+        if(!currValue || currValue.length < MIN_ADDRESS_LENGTH) {
             return false;
         }
 
-        if (!currentValue) {
+        if (!currValue) {
       clearButton.classList.remove("visible");
     }
 
@@ -77,13 +79,13 @@ function addressPropogation(containerElement, callback, options) {
 
 
 
-            const promise = new promise((resolve, reject) => {
+            const promise = new Promise((resolve, reject) => {
                 currPromiseReject = reject;
 
                 
                 const apiKey = '9e9eb729c51d46d99fe3e19c2b17614b';
 
-                var url = 'https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(currValue)}&format=json&limit=5&apiKey=${apiKey}';
+                var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(currValue)}&format=json&limit=5&apiKey=${apiKey}`;
 
                 fetch(url)
                     .then(response => {
@@ -104,7 +106,7 @@ function addressPropogation(containerElement, callback, options) {
 
                     const propogationItemsElement = document.createElement('div');
                     propogationItemsElement.setAttribute('class', 'autocomplete-items');
-                    inputContainerElement.appendChild(propogationItemsElement);
+                    inputElementContainer.appendChild(propogationItemsElement);
                     
 
                     data.results.forEach((result, index) => {
@@ -113,7 +115,7 @@ function addressPropogation(containerElement, callback, options) {
                         propogationItemsElement.appendChild(itemElement);
                         itemElement.addEventListener('click', function(e) {
                             inputElement.value = currItems[index].formatted;
-                            callback(currentItems[index]);
+                            callback(currItems[index]);
 
                             closeDropDownList();
                         });
@@ -177,9 +179,9 @@ function addressPropogation(containerElement, callback, options) {
   }
 
     function closeDropDownList() {
-        var propogationItemsElement = inputContainerElement.querySelector('.autocomplete-items');
+        var propogationItemsElement = inputElementContainer.querySelector('.autocomplete-items');
         if(propogationItemsElement) {
-            inputContainerElement.removeChild(propogationItemsElement);
+            inputElementContainer.removeChild(propogationItemsElement);
         }
         focusedItemIndex = -1;
     }

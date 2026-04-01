@@ -49,8 +49,12 @@
                             <th colspan="3">Delivery Method</th>
                         </tr>
                     </thead>
-                    <tbody>                        
-                            <div class='deliverymethod' id='deliverymethodcontainer'></div>                           
+                    <tbody>    
+                        <tr>
+                            <td colspan='3'>
+                                <div class='deliverymethod' id='deliverymethodcontainer'></div>      
+                            </td>
+                        </tr>    
                     </tbody>
                 </table>     
                 <div class = "CartItemsSumTable">
