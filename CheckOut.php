@@ -54,7 +54,16 @@
                             <td colspan='3'>
                                 <div class='autocomplete-container' id='autocomplete-container'></div>      
                             </td>
-                        </tr>    
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="street"></div><div id="postcode"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="city"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="state"></div><div id="country"></div></td>
+                        </tr>
                     </tbody>
                 </table>     
                 <div class = "CartItemsSumTable">

@@ -28,6 +28,22 @@ function addressPropogation(containerElement, callback, options) {
     inputElement.setAttribute('type', 'text');
     inputElement.setAttribute('placeholder', options.placeholder);
     inputElementContainer.appendChild(inputElement);
+    
+    const fieldInputs = {};
+    
+    if(options.fields) {
+        Object.keys(options.fields).forEach(key => {
+            const container = options.fields[key];
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = key.charAt(0).toUpperCase() + key.slice(1);
+            
+            container.appendChild(input);
+            
+            fieldInputs[key] = input;
+        });
+    }
 
     var currItems;
     let focusedItemIndex;
@@ -114,8 +130,13 @@ function addressPropogation(containerElement, callback, options) {
                         itemElement.innerHTML = result.properties.formatted;
                         propogationItemsElement.appendChild(itemElement);
                         itemElement.addEventListener('click', function(e) {
-                            inputElement.value = result.properties.formatted;
-                            callback(result.properties);
+                            const props = result.properties;
+                            
+                            
+                            inputElement.value = props.formatted;
+                            
+                            fillFields(props);
+                            callback(props);
 
                             closeDropDownList();
                         });
@@ -173,9 +194,12 @@ function addressPropogation(containerElement, callback, options) {
     /* Add class "autocomplete-active" to the active element*/
     items[index].classList.add("autocomplete-active");
 
+    const props = currItems[index].properties;
     // Change input value and notify
-    inputElement.value = currItems[index].properties.formatted;
-    callback(currItems[index].properties);
+    inputElement.value = props.formatted;
+    
+    fillFields(props);
+    callback(props);
   }
 
     function closeDropDownList() {
@@ -208,11 +232,30 @@ function addressPropogation(containerElement, callback, options) {
       inputElement.dispatchEvent(event);
     }
   });
+  
+  function fillFields(props) {
+      if(!fieldInputs) return;
+      const cityValue = props.city || props.town || props.village || props.county || '';
+      
+      if(fieldInputs.street) fieldInputs.street.value = props.address_line1 || '';
+      if(fieldInputs.city) fieldInputs.city.value = cityValue;
+      if(fieldInputs.state) fieldInputs.state.value = props.state || '';
+      if(fieldInputs.country) fieldInputs.country.value = props.country || '';
+      if(fieldInputs.postcode) fieldInputs.postcode.value = props.postcode || '';
+  }
 }
 
 addressPropogation(document.getElementById('autocomplete-container'), (data) => {
     console.log('Selected option: ');
     console.log(data);
 }, {
-    placeholder:"Enter an address here"
+    placeholder:"Enter an address here",
+    
+    fields: {
+        street: document.getElementById('street'),
+        city: document.getElementById('city'),
+        state: document.getElementById('state'),
+        country: document.getElementById('country'),
+        postcode: document.getElementById('postcode')
+    }
 });

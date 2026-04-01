@@ -154,6 +154,14 @@ tr th{
   margin-bottom: 20px;
 }
 
+.CartItemsTable input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
 .input-container {
   display: flex;
   position: relative;
@@ -168,7 +176,6 @@ tr th{
   padding-right: 31px;
   font-size: 16px;
 }
-
 
 .autocomplete-items {
   position: absolute;
