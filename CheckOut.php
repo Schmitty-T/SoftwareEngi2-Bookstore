@@ -50,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>                        
-                                                       
+                            <div class='deliverymethod' id='deliverymethodcontainer'></div>                           
                     </tbody>
                 </table>     
                 <div class = "CartItemsSumTable">
