@@ -99,8 +99,8 @@ button a:hover{
     font-size: 18px; 
     
 }
-.paymentselection{
-     width: 26%;
+.CartItemsSumTable{
+    width: 26%;
     margin-top:10px;
 }
 
@@ -156,6 +156,7 @@ tr th{
 
 .input-container {
   display: flex;
+  position: relative;
 }
 
 .input-container input {
@@ -166,12 +167,6 @@ tr th{
   padding: 10px;
   padding-right: 31px;
   font-size: 16px;
-}
-
-
-.input-container {
-  ...
-  position: relative;
 }
 
 

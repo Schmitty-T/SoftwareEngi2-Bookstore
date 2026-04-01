@@ -52,7 +52,7 @@
                     <tbody>    
                         <tr>
                             <td colspan='3'>
-                                <div class='deliverymethod' id='deliverymethodcontainer'></div>      
+                                <div class='autocomplete-container' id='autocomplete-container'></div>      
                             </td>
                         </tr>    
                     </tbody>

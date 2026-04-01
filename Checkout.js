@@ -85,7 +85,7 @@ function addressPropogation(containerElement, callback, options) {
                 
                 const apiKey = '9e9eb729c51d46d99fe3e19c2b17614b';
 
-                var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(currValue)}&format=json&limit=5&apiKey=${apiKey}`;
+                var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(currValue)}&limit=5&apiKey=${apiKey}`;
 
                 fetch(url)
                     .then(response => {
@@ -102,20 +102,20 @@ function addressPropogation(containerElement, callback, options) {
 
                 promise.then((data) => {
 
-                    currItems = data.results;
+                    currItems = data.features;
 
                     const propogationItemsElement = document.createElement('div');
                     propogationItemsElement.setAttribute('class', 'autocomplete-items');
                     inputElementContainer.appendChild(propogationItemsElement);
                     
 
-                    data.results.forEach((result, index) => {
+                    data.features.forEach((result) => {
                         const itemElement = document.createElement('div');
-                        itemElement.innerHTML = result.formatted;
+                        itemElement.innerHTML = result.properties.formatted;
                         propogationItemsElement.appendChild(itemElement);
                         itemElement.addEventListener('click', function(e) {
-                            inputElement.value = currItems[index].formatted;
-                            callback(currItems[index]);
+                            inputElement.value = result.properties.formatted;
+                            callback(result.properties);
 
                             closeDropDownList();
                         });
@@ -174,8 +174,8 @@ function addressPropogation(containerElement, callback, options) {
     items[index].classList.add("autocomplete-active");
 
     // Change input value and notify
-    inputElement.value = currItems[index].formatted;
-    callback(currItems[index]);
+    inputElement.value = currItems[index].properties.formatted;
+    callback(currItems[index].properties);
   }
 
     function closeDropDownList() {
@@ -210,7 +210,7 @@ function addressPropogation(containerElement, callback, options) {
   });
 }
 
-addressPropogation(document.getElementById('deliverymethodcontainer'), (data) => {
+addressPropogation(document.getElementById('autocomplete-container'), (data) => {
     console.log('Selected option: ');
     console.log(data);
 }, {
