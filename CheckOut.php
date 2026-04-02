@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-        $db = new PDO("sqlite:categories.db");
+        $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
         $stmt = $db->query("SELECT * FROM Products");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -49,8 +49,21 @@
                             <th colspan="3">Delivery Method</th>
                         </tr>
                     </thead>
-                    <tbody>                        
-                                                       
+                    <tbody>    
+                        <tr>
+                            <td colspan='3'>
+                                <div class='autocomplete-container' id='autocomplete-container'></div>      
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="street"></div><div id="postcode"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="city"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><div id="state"></div><div id="country"></div></td>
+                        </tr>
                     </tbody>
                 </table>     
                 <div class = "CartItemsSumTable">
