@@ -40,7 +40,7 @@ body {
     font-size: 18px;
 }
 
-button{
+#userPanel button{
     background: none;
     border: none;
     padding: 0;
@@ -100,7 +100,7 @@ button a:hover{
     
 }
 .CartItemsSumTable{
-    width: 26%;
+     width: 26%;
     margin-top:10px;
 }
 
@@ -111,14 +111,27 @@ button a:hover{
     align-items:flex-start;
     gap: 5%;
 }
-td img{
+.imgcell{
+    vertical-align: top;
+    padding-left:10px;
+}
+td img{   
     width:100px;
     height:auto;
-    padding-left: 10px;
+    display:block;    
+}
+.titlecell{
+    text-align: left;
+    vertical-align: top;
+}
+
+tr:first-child td{
+    padding-top:20px;
 }
 tr th{
-    border-bottom: 1px solid #0e4e8f
+    border-bottom: 1px solid #0e4e8f;        
 }
+
 .CheckoutButton{
     border-collapse: collapse;
     background-color: #0e4e8f;
@@ -135,3 +148,44 @@ tr th{
 .CheckoutButton:hover{
     color:gold;
 }
+.quantity{
+    display: flex;
+    align-items:center;
+    gap: 8px;
+}
+.button{
+    width:30px;
+    height: 30px;
+    font-size:24px;
+    font-weight:bold;
+    border:none;
+    background-color:#0e4e8f;
+    color: white;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.button:hover{
+    color:yellow;
+}
+
+.input{
+    width: 50px;
+    text-align: center;
+    font-size:16px;
+}
+.removeButton{
+    padding: 6px;
+    border:none;
+    background-color:#0e4e8f;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;    
+}
+.removeButton:hover{
+    color:yellow;
+}
+
+
+
+

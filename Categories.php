@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    $db = new PDO("sqlite:categories.db");
+    $db = new PDO("sqlite:bookstore.db");
 
     $category = $_GET['category'] ?? null;
     $search = $_GET['search'] ?? "";
@@ -51,7 +51,7 @@
                 <li><a href="Homepage.html">Homepage</a></li>
                 <li><a href="Categories.php" class="active">Categories</a></li>
                 <li><a href="Cart.php">Shopping Cart</a></li>
-                <li><a href="OrderHistory.html">Order History</a></li>
+                <li><a href="OrderHistory.php">Order History</a></li>
             </ul>
         </nav>
     </header>
@@ -81,16 +81,7 @@
                     style="width:500px; font-size:16px; margin-bottom: 30px; padding:10px;">
                 </div>
             </form>
-            <div style="justify-content: center; display: flex;">
-                <input type="text" id="searchBar" 
-                    placeholder="<?php 
-                        if (($category ?? '') == 'book') echo 'Enter ISBN or author name here..'; 
-                        elseif (($category ?? '') == 'Supply') echo 'Enter supply name here..';
-                        else echo 'Enter name here..'; 
-                    ?>"
-                    style="width:500px; font-size:16px; margin-bottom: 30px; padding:10px;">
-            </div>
-            </div>
+        </div>
     </main>
 
     <section>

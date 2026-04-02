@@ -46,36 +46,18 @@
                 <table class="CartItemsTable">
                     <thead>
                         <tr>
-                            <th colspan="3">Cart Items</th>
+                            <th colspan="3">Delivery Method</th>
                         </tr>
                     </thead>
                     <tbody>                        
-                            <?php foreach($products as $product): ?>
-                                <tr>
-                                    <td class="imgcell">
-                                        <?php if($product['category'] == 'book'):?>
-                                            <img src="https://covers.openlibrary.org/b/isbn/<?php echo $product['isbn']; ?>-M.jpg" alt="Book Cover">
-                                        <?php else:?>
-                                            <img src="<?php echo $product['image'];?>" alt ="supply image">
-                                        <?php endif ?>
-                                    </td>
-                                    <td class="titlecell">
-                                        <p>Author:<?php echo $product['author'];?></p>
-                                        <p>ISBN:<?php echo $product['isbn'];?></p>
-                                        <p>$<?php echo $product['price'];?></p>
-                                    </td>                    
-                                    <td><input class="checkbox" type = "checkbox" 
-                                               name = "products[]" value = 
-                                               "<?php echo $product['price']?>"></td>                  
-                                </tr>
-                            <?php endforeach; ?>                           
+                                                       
                     </tbody>
                 </table>     
                 <div class = "CartItemsSumTable">
                         <table>
                             <thead>
                                 <tr>
-                                    <th colspan ="2">Cart Items Sum</th>
+                                    <th colspan ="2">Payment Method</th>
                                 </tr>
                             </thead>
                             <tbody>                                
@@ -87,7 +69,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="CheckoutButton" onclick ="window.location.href = '#'">
+                        <button action="submit" class="CheckoutButton">
                                          Confirm Check Out       
                         </button>
                 </form>

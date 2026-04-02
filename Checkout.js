@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => 
+{
     const checkboxes = document.querySelectorAll('.checkbox');
-    const totalElement = document.getElementById('total');
-
+    const totalElem = document.getElementById('total');
+    
     checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
             let total = 0;
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            totalElement.textContent = total.toFixed(2);
+            totalElem.textContent = total.toFixed(2);
         });
     });
 });
