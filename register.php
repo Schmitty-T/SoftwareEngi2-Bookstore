@@ -6,7 +6,7 @@ try{
 
 try {
     //for database users connection
-    $db = new PDO("sqlite:users.db");
+    $db = new PDO("sqlite:bookstore.db");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

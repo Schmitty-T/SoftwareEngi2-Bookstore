@@ -18,7 +18,7 @@ try {
             exit();
         }
 
-        $dbQueryStatement = $db->prepare("SELECT * FROM users WHERE username = ?");
+        $dbQueryStatement = $db->prepare("SELECT * FROM admin_users WHERE username = ?");
         $dbQueryStatement->execute([$userName]);
         $user = $dbQueryStatement->fetch(PDO::FETCH_ASSOC);
 
