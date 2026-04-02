@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+// Connect to database
+try {
+    $db = new SQLite3('employees.db');
+} catch (Exception $e) {
+    die("Database connection failed");
+}
+?>
+
+!DOCTYPE html>
 <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -18,7 +27,7 @@
 
             <div id="userPanel">
                 <span>Hello, <span id="username"></span>Johnatan</span>
-                <button><a href="Login.html">Log Out</a></button>
+                <button><a href="login.php">Log Out</a></button>
             </div>
         </div>
     </header>
@@ -37,11 +46,19 @@
                     </tr>
                 </thead>
                 <tbody id="orderBody">
-                    <tr><td>17231</td><td>2024-05-01</td><td>Delivered</td></tr>
-                    <tr><td>3364</td><td>2024-05-15</td><td>Delivered</td></tr>
-                    <tr><td>12346</td><td>2024-06-01</td><td>Delivered</td></tr>
-                    <tr><td>34577</td><td>2024-06-01</td><td>Delivered</td></tr>
-                    <tr><td>13451</td><td>2024-06-01</td><td>Processing</td></tr>
+
+                    <?php
+                    $results = $db->query("SELECT OrderID, OrderDate, Status FROM Orders");
+
+                    while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['OrderID']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['OrderDate']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['Status']) . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </div>
@@ -57,16 +74,25 @@
                     </tr>
                 </thead>
                 <tbody id="ShipmentsBody">
-                    <tr><td>5353</td><td>2026-02-26</td><td>Pearson</td></tr>
-                    <tr><td>1263</td><td>2026-03-1</td><td>McGraw Hill</td></tr>                
-                    <tr><td>3421</td><td>2025-11-29</td><td>Sharpie</td></tr>
-                    <tr><td>9111</td><td>2025-11-28</td><td>Crayola</td></tr>               
+
+                    <?php
+                    $results = $db->query("SELECT ShipmentID, ShipDate, Vendor FROM Shipments");
+
+                    while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['ShipmentID']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['ShipDate']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['Vendor']) . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+
                 </tbody>
             </table>
         </div>
 
     </div>
     </main>
-    <a href="AdminEmployeePage.html" class="EmpInfoButton">Employee Info</a>
+    <a href="AdminEmployeePage.php" class="EmpInfoButton">Employee Info</a>
   </body>
 </html>
