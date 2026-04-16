@@ -104,10 +104,10 @@
                     <?php endif; ?>
 
                     <p>$<?php echo $product['price']; ?></p>
-                    <a href="cart.html" class="addCartBtn">Add to Cart</a>
+                    <a href="Cart.php" class="addCartBtn">Add to Cart</a>
                 </div>
             </article>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
     </section>
     <script>
