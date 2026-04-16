@@ -27,7 +27,7 @@ try {
 
             <div id="userPanel">
                 <span>Hello, <span id="username"></span>Johnatan</span>
-                <button><a href="login.php">Log Out</a></button>
+                <button><a href="adminLogin.html">Log Out</a></button>
             </div>
         </div>
     </header>
