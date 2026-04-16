@@ -19,14 +19,28 @@ try {
 <body>
 
 <header>
-    <h1 style="text-align:center; color:#0e4e8f;">Employee Information</h1>
+     <body>
+    <header>
+        <div id="headerTop">
+            <div class="headerLeft"></div>
+
+            <div id="logo">
+                <img src="McNeeseLogo.png" alt="Bookstore Logo">
+            </div>
+
+            <div id="userPanel">
+                <span>Hello, <span id="username"></span>Johnatan</span>
+                <button><a href="login.php">Log Out</a></button>
+            </div>
+        </div>
+    </header>
 </header>
 
 <main>
 
 <table id="EmployeeID">
 
-    <caption>Employee List</caption>
+    <caption>Employee Info</caption>
 
     <thead>
         <tr>

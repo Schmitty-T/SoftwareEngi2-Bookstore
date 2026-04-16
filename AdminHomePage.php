@@ -7,7 +7,7 @@ try {
 }
 ?>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -37,7 +37,7 @@ try {
     <div class="tableRow">
         <div class="Orders">
             <table>
-                <caption>Orders</caption>
+                <caption>Store Orders</caption>
                 <thead>
                     <tr>
                         <th>Order ID</th>
@@ -65,7 +65,7 @@ try {
 
         <div class="Shipments">
             <table>
-                <caption>Shipments</caption>
+                <caption>Vendor Shipments</caption>
                 <thead>
                     <tr>
                         <th>Shipment ID</th>

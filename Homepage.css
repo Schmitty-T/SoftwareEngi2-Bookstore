@@ -90,13 +90,52 @@ main{
     background-image: url(BookstoreCoverImage.png);
     background-size: cover;
     background-position: center;
-    max-width: auto;
     margin: 10px;
 }
 
-main h1{
-    text-align: center;
-    margin: 30px;
-    color: #0e4e8f;
+/* NEWS SECTION (OUTER BOX) */
+.newsSection{
+    margin: 40px auto;
+    padding: 30px;
+    width: 80%;
+    border-radius: 15px;
 
+    /* Semi-transparent background */
+    background: rgba(255, 255, 255, 0.7);
+
+    /* Glass effect */
+    backdrop-filter: blur(6px);
+
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Title */
+.newsSection h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0e4e8f;
+}
+
+/* INNER CONTAINER */
+.newsContainer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* INDIVIDUAL NEWS BOXES */
+.newsBox{
+    width: 280px;
+    padding: 15px;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: #0e4e8f;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.newsBox h2{
+    margin-top: 0;
 }
