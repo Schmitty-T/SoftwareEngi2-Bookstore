@@ -103,6 +103,13 @@ button a:hover{
     width: 26%;
     margin-top:10px;
 }
+.CartItemsSumTable input {
+    width:96%;
+    padding-left: 5px;
+    margin-left:5px;
+    height: 40px;
+    font-size:16px;
+}
 
 .CartItemsContainer{
     display: flex;
@@ -124,6 +131,7 @@ td img{
     text-align: left;
     vertical-align: top;
 }
+
 tr th{
     border-bottom: 1px solid #0e4e8f
 }

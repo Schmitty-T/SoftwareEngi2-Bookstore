@@ -259,3 +259,33 @@ addressPropogation(document.getElementById('autocomplete-container'), (data) => 
         postcode: document.getElementById('postcode')
     }
 });
+
+
+document.getElementById('CardNumber').addEventListener('keypress', function(e) {
+    if(!/[0-9]/.test(e.key)) {
+        e.preventDefault();
+    }
+});
+document.getElementById('Ccv').addEventListener('keypress', function(e) {
+    if(!/[0-9]/.test(e.key)) {
+        e.preventDefault();
+    }
+});
+
+ 
+const cardNumberInput = document.getElementById('CardNumber');
+cardNumberInput.addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    value = value.replace(/(\d{4})(?=\d)/g, '$1-');
+    
+    e.target.value = value;
+});
+function successPopup() {
+    alert(" Congratulations, your purchase has been processed and your payment method was successful!!");
+    window.location.href='categories.php';
+}
+function errorPopup() {
+    alert("The Card Information You have Entered Is Invalid");
+    window.history.back();
+}
