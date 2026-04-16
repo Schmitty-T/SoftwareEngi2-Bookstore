@@ -77,7 +77,8 @@ registtrationForm.addEventListener("submit", async function(e){
         const data = await response.json();
 
         if(data.status === "success"){
-            alert("Login successful, welcome, " + data.username);
+            const usernameParam = encodeURIComponent(data.username);
+            window.location.href = "Homepage.html?username=" + usernameParam;
         } else {
             alert("Login failed!!! " + data.message);
         }

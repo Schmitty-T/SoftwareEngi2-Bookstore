@@ -15,7 +15,9 @@
 
 <main class="main">
     <div class="register">
-        <form id="register-form">
+    
+        <form id="register-form">   
+            
             <div class="inputGroup">
                 <label for="Username">Username</label>
                 <input type="text" id="Username" name="username" required>
@@ -71,7 +73,8 @@ document.getElementById("register-form").addEventListener("submit", async functi
         const data = await response.json();
 
         if(data.status == "success"){
-            alert("Registration successful! Welcome, " + data.username);
+            const usernameParam = encodeURIComponent(data.username);
+            window.location.href = "Homepage.html?username=" + usernameParam;
             document.getElementById("register-form").reset();
         } else {
             alert("Error ocurred: " + data.message);

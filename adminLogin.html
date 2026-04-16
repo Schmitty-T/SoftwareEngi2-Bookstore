@@ -37,29 +37,31 @@
 <script>
     var registtrationForm = document.getElementById("register-form");
 
-    var password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
+registtrationForm.addEventListener("submit", async function(e){
+    e.preventDefault();
 
-    registtrationForm.addEventListener("submit", function(e){
+    const formData = new FormData(registtrationForm);
 
-        var pass1 = password.value;
-        var pass2 = confirmPassword.value;
-        var pass2 = confirmPassword.value;
-        
-        var passwordsMatch = false;
+    try {
+        const response = await fetch("adminlogin.php", {
+            method: "POST",
+            body: formData
+        });
 
-        if(pass1 == pass2){
-            passwordsMatch = true;
-        }
+        const data = await response.json();
 
-        if(passwordsMatch == false){
-            e.preventDefault();
-            alert("Passwords don't match. Please try again.");
+        if(data.status === "success"){
+            const usernameParam = encodeURIComponent(data.username);
+            window.location.href = "AdminHomepage.html?username=" + usernameParam;
         } else {
-            alert("Registration successful!");
+            alert("Login failed!!! " + data.message);
+            
         }
-
-    });
+    } catch (err) {
+        alert("Server error. try later.");
+        console.error(err);
+    }
+});
 </script>
 </body>
 </html>
