@@ -3,14 +3,24 @@
     $db = new PDO("sqlite:bookstore.db");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-   // $userId = $_SESSION["userId"];
-   // $username = $_SESSION["username"];
-    $userId = 1; //Testing order history page
-    $username = "testuser";
+    $username = $_GET['username'] ?? 'Guest';
+
+    $stmtUser = $db->prepare("SELECT userId FROM users WHERE username = ?");
+    $stmtUser->execute([$username]);
+    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+    $userId = $user['userId'] ?? null;
 
     $stmt = $db->prepare("SELECT * FROM Orders WHERE userId = ?");
     $stmt->execute([$userId]);
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+     if(!$userId) {
+        $stmtOrders = $db->prepare("SELECT * FROM Orders WHERE userId = ?");
+        $stmtOrders->execute([$userId]);
+        $orders = $stmtOrders->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $orders = [];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -30,16 +40,16 @@
                 <img src="McNeeseLogo.png" alt="Bookstore Logo">
             </div>
             <div id="userPanel">
-                <span>Hello, <span id="username"></span>Johnatan</span>
+                <span>Hello, <?php echo htmlspecialchars($username); ?></span>
                 <button><a href="Login.html">Log Out</a></button>
             </div>
         </div>
         <nav id="navBar">
             <ul>
-                <li><a href="Homepage.html">Homepage</a></li>
-                <li><a href="Categories.php">Categories</a></li>
-                <li><a href="Cart.html">Shopping Cart</a></li>
-                <li><a href="OrderHistory.php" class="active">Order History</a></li>
+                <li><a href="Homepage.html?username=<?php echo urlencode($username); ?>">Homepage</a></li>
+                <li><a href="Categories.php?username=<?php echo urlencode($username); ?>">Categories</a></li>
+                <li><a href="Cart.php?username=<?php echo urlencode($username); ?>">Shopping Cart</a></li>
+                <li><a href="OrderHistory.php?username=<?php echo urlencode($username); ?>" class="active">Order History</a></li>
             </ul>
         </nav>
     </header>
