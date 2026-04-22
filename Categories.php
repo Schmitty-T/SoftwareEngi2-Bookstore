@@ -4,6 +4,7 @@
 
     $category = $_GET['category'] ?? null;
     $search = $_GET['search'] ?? "";
+    $username = $_GET['username'] ?? 'Guest';
 
     $sql = "SELECT * FROM Products WHERE 1=1";
     $params = [];
@@ -42,16 +43,16 @@
                 <img src="McNeeseLogo.png" alt="Bookstore Logo">
             </div>
             <div id="userPanel">
-                <span>Hello, <span id="username"></span>Johnatan</span>
+                <span>Hello, <?php echo htmlspecialchars($username); ?></span>
                 <button><a href="Login.html">Log Out</a></button>
             </div>
         </div>
         <nav id="navBar">
             <ul>
-                <li><a href="Homepage.html">Homepage</a></li>
-                <li><a href="Categories.php" class="active">Categories</a></li>
-                <li><a href="Cart.php">Shopping Cart</a></li>
-                <li><a href="OrderHistory.php">Order History</a></li>
+                <li><a href="Homepage.html?username=<?php echo urlencode($username); ?>">Homepage</a></li>
+                <li><a href="Categories.php?username=<?php echo urlencode($username); ?>" class="active">Categories</a></li>
+                <li><a href="Cart.php?username=<?php echo urlencode($username); ?>">Shopping Cart</a></li>
+                <li><a href="OrderHistory.php?username=<?php echo urlencode($username); ?>">Order History</a></li>
             </ul>
         </nav>
     </header>
@@ -60,13 +61,13 @@
         <div id="categorySearch">
             <div id="categoryMenu">
                 <a class="category <?php if(($category ?? '') == '') echo 'active'; ?>" 
-                href="categories.php?search=<?php echo urlencode($search ?? ''); ?>">All</a>
+                href="categories.php?search=<?php echo urlencode($search ?? ''); ?>&username=<?php echo urlencode($username); ?>">All</a>
 
                 <a class="category <?php if(($category == 'book')) echo 'active'; ?>" 
-                href="categories.php?category=book&search=<?php echo urlencode($search ?? ''); ?>">Books</a>
+                href="categories.php?category=book&search=<?php echo urlencode($search ?? ''); ?>&username=<?php echo urlencode($username); ?>">Books</a>
     
                 <a class="category <?php if(($category == 'Supply')) echo 'active'; ?>" 
-                href="categories.php?category=Supply&search=<?php echo urlencode($search ?? ''); ?>">Supplies</a>
+                href="categories.php?category=Supply&search=<?php echo urlencode($search ?? ''); ?>&username=<?php echo urlencode($username); ?>">Supplies</a>
             </div>
             <h3 style="color: #0e4e8f; font-size: 18px; padding-top: 30px; margin-top: 30px; text-align: center;">Search Products</h3>
             <br/>
