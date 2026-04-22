@@ -17,7 +17,7 @@
         </div>
 
         <div id="userPanel">
-            <span>Hello, <span id="username"></span>Johnatan</span>
+            <span>Hello, <span id="username"></span></span>
             <button><a href="login.html">Log Out</a></button>
         </div>
     </div>
@@ -60,5 +60,30 @@
     </div>
 
 </main>
+<script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Get the username from the URL and display it
+    const username = getUrlParameter('username');
+    if (username) {
+        document.getElementById('username').textContent = decodeURIComponent(username);
+    } else {
+        // Fallback if no username is provided (e.g., direct access to homepage)
+        document.getElementById('username').textContent = 'Guest';
+    }
+
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+        const url = new URL(link.href, window.location.origin);
+        if (!url.searchParams.has('username') && username) {
+            url.searchParams.set('username', encodeURIComponent(username));
+            link.href = url.toString();
+        }
+    });
+</script>
 </body>
 </html>
