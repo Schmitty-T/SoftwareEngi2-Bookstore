@@ -79,10 +79,10 @@
         </div>
         <nav id="navBar">
             <ul>
-                <li><a href="Homepage.html">Homepage</a></li>
-                <li><a href="Categories.php"> Categories</a></li>
-                <li><a href="cart.php">Shopping Cart</a></li>
-                <li><a href="OrderHistory.php">Order History</a></li>
+                <li><a href="Homepage.html?username=<?php echo urlencode($username); ?>">Homepage</a></li>
+                <li><a href="Categories.php?username=<?php echo urlencode($username); ?>"> Categories</a></li>
+                <li><a href="cart.php?username=<?php echo urlencode($username); ?>">Shopping Cart</a></li>
+                <li><a href="OrderHistory.php?username=<?php echo urlencode($username); ?>">Order History</a></li>
             </ul>
         </nav>
         </header>
