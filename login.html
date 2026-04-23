@@ -30,62 +30,52 @@
                 </div>
                 
                 <button type="submit" class="REgister">Login</button>
+                <!--for routing to thee register page-->
+                <h4 style="margin-top: 0px; font-weight: 99;">Dont have an account? <a href="register.html">Register here.</a></h4>
+            <div id="errorbox" style="width: 100%; height: 100px; border: 1px solid red; border-radius: 4px; background-color: rgba(255,0,0,.3); display: none; flex-direction: column; align-items: center; justify-content: center;">
+                <h4 style="margin-top: 0px; font-weight: 100;">Incorrect Password!</h4>
+            </div>
             </form>
         </div>
     </main>
 <script>
 
-    /*var registtrationForm = document.getElementById("register-form");
-
-    var password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
-
-    registtrationForm.addEventListener("submit", function(e){
-
-        var pass1 = password.value;
-        var pass2 = confirmPassword.value;
-        var pass2 = confirmPassword.value;
-        
-        var passwordsMatch = false;
-
-        if(pass1 == pass2){
-            passwordsMatch = true;
-        }
-
-        if(passwordsMatch == false){
-            e.preventDefault();
-            alert("Passwords don't match. Please try again.");
-        } else {
-            alert("Registration successful!");
-        }
-
-    });*/
-
     var registtrationForm = document.getElementById("register-form");
-
 registtrationForm.addEventListener("submit", async function(e){
     e.preventDefault();
 
-    const formData = new FormData(registtrationForm);
+    const formsData = new FormData(registtrationForm);
 
+    //for registration
     try {
         const response = await fetch("login.php", {
-            method: "POST",
-            body: formData
-        });
+        method: "POST", body: formsData});
 
-        const data = await response.json();
+        const dataGrabbed = await response.json();
 
-        if(data.status === "success"){
-            const usernameParam = encodeURIComponent(data.username);
-            window.location.href = "Homepage.html?username=" + usernameParam;
-        } else {
-            alert("Login failed!!! " + data.message);
-        }
+        if(dataGrabbed.status == "success"){
+            //for grabingg username from request
+            const usernameoaram = encodeURIComponent(dataGrabbed.username);
+            window.location.href = "Homepage.html?username=" + usernameoaram;
+        } else if (dataGrabbed.status =="failure"){
+            const erorM = "server error found"
+            console.log(erorM);
+            alert("Error in server!: " + erorM)}
+        else {
+            const errorBox = document.getElementById("errorbox")
+            errorBox.style.display = "flex";
+            //make console logfor flex
+        } 
     } catch (err) {
-        alert("Server error. try later.");
+        //if request cantt be grabbed from backnd
+        alert("Server error!! try later.");
         console.error(err);
-    }
+        console.error(err);
+    }/*
+    catch (errorCaught){
+    let errorTex = document.getElementById("errorbox")
+    alert("Err found!!!!")}
+    */
 });
 
 </script>
