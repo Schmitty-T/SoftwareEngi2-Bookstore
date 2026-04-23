@@ -2,7 +2,11 @@
 <?php
         $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
-        $stmt = $db->query("SELECT * FROM Products");
+        $username = $_GET['username'] ?? 'Guest';
+        
+        $stmt = $db->query("SELECT * 
+                FROM OrderItems
+                INNER JOIN Products ON OrderItems.productId = Products.productId;");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $priceQuery = $db->query("SELECT SUM(price) AS total_price FROM Products");
         $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
@@ -26,7 +30,7 @@
                 <img src="McNeeseLogo.png" alt="Bookstore Logo">
             </div>
             <div id="userPanel">
-                <span>Hello, <span id="username"></span>Johnatan</span>
+                <span>Hello, <?php echo htmlspecialchars($username); ?></span>
                 <button><a href="Login.html">Log Out</a></button>
             </div>
         </div>
