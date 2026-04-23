@@ -31,18 +31,23 @@
         $orderId = $order['orderId'];
         }
 
-        $stmt = $db->prepare("SELECT * FROM orderItems WHERE orderId = ? AND productId = ?");
+        $stmt = $db->prepare("SELECT * FROM OrderItems WHERE orderId = ? AND productId = ?");
         $stmt->execute([$orderId, $productId]);
         $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($item) {
        
-        $stmt = $db->prepare("UPDATE orderItems SET quantity = quantity + 1 WHERE orderId = ? AND productId = ?");
+        $stmt = $db->prepare("UPDATE OrderItems SET quantity = quantity + 1 WHERE orderId = ? AND productId = ?");
         $stmt->execute([$orderId, $productId]);
     } else {
-        
-        $stmt = $db->prepare("INSERT INTO orderItems (orderId, productId, quantity) VALUES (?, ?, 1)");
-        $stmt->execute([$orderId, $productId]);
+        $stmtPrice = $db->prepare("SELECT price FROM Products WHERE productId = ?");
+        $stmtPrice->execute([$productId]);
+        $product = $stmtPrice->fetch(PDO::FETCH_ASSOC);
+
+        $price = $product['price'];
+
+        $stmt = $db->prepare("INSERT INTO OrderItems (orderId, productId, quantity, price) VALUES (?, ?, 1, ?)");
+        $stmt->execute([$orderId, $productId, $price]);
     }
 }
     header("Location: Cart.php?username=" . urlencode($username));
