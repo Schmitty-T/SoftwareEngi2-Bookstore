@@ -81,7 +81,7 @@
                 <li><a href="Homepage.html">Homepage</a></li>
                 <li><a href="Categories.php"> Categories</a></li>
                 <li><a href="cart.php">Shopping Cart</a></li>
-                <li><a href="OrderHistory.html">Order History</a></li>
+                <li><a href="OrderHistory.php">Order History</a></li>
             </ul>
         </nav>
         </header>
