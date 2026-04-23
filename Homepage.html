@@ -34,25 +34,60 @@
 
 <main>
 
+    <div class="searchSection">
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search for books, authors, ISBN..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
     <div class="newsSection">
 
         <h1>Latest News</h1>
 
         <div class="newsContainer">
-
+            
             <div class="newsBox">
-                <h2>New Arrivals</h2>
-                <p>Check out the latest books now available in our store.</p>
+                <div class="newsHeader">
+                    <h2>New Arrivals</h2>
+                    <span class="toggleIcon">▼</span>
+                </div>
+                <p class="newsPreview">Check out the latest books now available in our store.</p>
+                <div class="newsContent">
+                    <p> We're excited to announce our latest collection of bestselling titles across 
+                        all genres. From contemporary fiction to academic texts, our new arrivals 
+                        section features carefully curated selections from top publishers. Explore 
+                        our expanded inventory and find your next favorite read.
+                    </p>
+                </div>
             </div>
-
+            
             <div class="newsBox">
-                <h2>Summer Sale</h2>
-                <p>Get up to 30% off selected in store items this week!</p>
+                <div class="newsHeader">
+                    <h2>Summer Sale</h2>
+                    <span class="toggleIcon">▼</span>
+                </div>
+                <p class="newsPreview">Get up to 30% off selected in store items this week!</p>
+                <div class="newsContent">
+                    <p> This summer, enjoy incredible savings on thousands of books! Get up to 30% off on your 
+                        favorite titles in our Summer Sale. Whether you're looking for best-sellers, classics, 
+                        or new releases, this is the perfect time to build your library. Sale runs through the 
+                        end of August. No code needed—discounts applied at checkout.</p>
+                </div>
             </div>
-
+            
             <div class="newsBox">
-                <h2>Store Update</h2>
-                <p>We’ve expanded our inventory with new categories.</p>
+                <div class="newsHeader">
+                    <h2>Store Update</h2>
+                    <span class="toggleIcon">▼</span>
+                </div>
+                <p class="newsPreview">We've expanded our inventory with new categories.</p>
+                <div class="newsContent">
+                    <p> We're thrilled to announce the opening of three new sections in our bookstore! This 
+                        month we've added Young Adult Fiction, Graphic Novels, and Local Authors. These 
+                        additions complement our existing collection and reflect the diverse reading interests 
+                        of our community. Stop by to explore these new areas and discover your next favorite book!</p>
+                </div>
             </div>
 
         </div>
@@ -85,6 +120,37 @@
             link.href = url.toString();
         }
     });
+
+    // Add dropdown functionality to news boxes
+    const newsBoxes = document.querySelectorAll('.newsBox');
+    newsBoxes.forEach(box => 
+    {
+        const header = box.querySelector('.newsHeader');
+        header.addEventListener('click', function() 
+        {
+            box.classList.toggle('expanded');
+            const icon = header.querySelector('.toggleIcon');
+            icon.textContent = box.classList.contains('expanded') ? '▲' : '▼';
+        });
+        header.style.cursor = 'pointer';
+    });
+
+    // Handle search form submission
+    const searchForm = document.getElementById('searchForm');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchInput = document.getElementById('searchInput').value.trim();
+            if (searchInput) {
+                const searchUrl = 'Categories.php?search=' + encodeURIComponent(searchInput);
+                if (username) {
+                    window.location.href = searchUrl + '&username=' + encodeURIComponent(username);
+                } else {
+                    window.location.href = searchUrl;
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
