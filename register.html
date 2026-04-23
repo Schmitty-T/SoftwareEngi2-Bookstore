@@ -39,6 +39,11 @@
             </div>
             
             <button type="submit" class="REgister">Register</button>
+            <h4 style="margin-top: 0px; font-weight: 100;">Already have an account? <a href="login.html">Login here.</a></h4>
+            <!--error box-->
+            <div id="errorbox" style="width: 100%; width: 100%; height: 100px; border: 1px solid red; border-radius: 4px; background-color: rgba(255,0,0,.3); display: none; flex-direction: column; align-items: center; justify-content: center;">
+                <h4 style="margin-top: 0px; font-weight: 100;">Username or email already exist!!!</h4>
+            </div>
         </form>
     </div>
 </main>
@@ -59,6 +64,7 @@ document.getElementById("register-form").addEventListener("submit", async functi
     }
 
     const formsData = new FormData();
+    //for collect the form data
     formsData.append("username", userName);
     formsData.append("email", email);
     formsData.append("password", password);
@@ -73,17 +79,28 @@ document.getElementById("register-form").addEventListener("submit", async functi
         const data = await response.json();
 
         if(data.status == "success"){
+            //routes to the homepage and encodse the username
             const usernameParam = encodeURIComponent(data.username);
             window.location.href = "Homepage.html?username=" + usernameParam;
             document.getElementById("register-form").reset();
-        } else {
-            alert("Error ocurred: " + data.message);
+        } else if (data.status =="failure"){
+            const erorM = "server error found"
+            console.log(erorM);
+            alert("Error in server!: " + erorM)
+        }else {
+            alert("error ocurred!: " + data.message);
         }
 
     } catch (errorFound) {
-        alert("Request failed. Username or email already exist");
+        const errorsbox = document.getElementById("errorbox")
+        errorsbox.style.display = "flex";
         console.error(errorFound);
     }
+    /*
+    catch (errorCaught){
+    let errorTex = document.getElementById("errorbox")
+    alert("Err found!!!!")}
+    */
 });
 </script>
 
