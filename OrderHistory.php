@@ -15,7 +15,7 @@
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
      if(!$userId) {
-        $stmtOrders = $db->prepare("SELECT * FROM Orders WHERE userId = ?");
+        $stmtOrders = $db->prepare("SELECT * FROM Orders WHERE userId = ? AND status = 'completed'");
         $stmtOrders->execute([$userId]);
         $orders = $stmtOrders->fetchAll(PDO::FETCH_ASSOC);
     } else {
