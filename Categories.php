@@ -31,6 +31,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name = "author" content="Yuni Lin">
+    <meta name="viewport" content="wideth=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Categories.css">
     <title>Category</title>
 </head>
@@ -73,6 +74,8 @@
             <br/>
             <form method="GET" action="categories.php">
                 <div style="justify-content: center; display: flex;">
+                    <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
+                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($category ?? ''); ?>">
                     <input type="text" id="searchBar" name = "search" value="<?php echo htmlspecialchars($search); ?>"
                     placeholder="<?php 
                         if (($category ?? '') == 'book') echo 'Enter ISBN or author name here..'; 
