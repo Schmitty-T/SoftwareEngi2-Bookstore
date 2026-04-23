@@ -93,6 +93,62 @@ main{
     margin: 10px;
 }
 
+/* SEARCH SECTION */
+.searchSection {
+    margin: 30px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+#searchForm {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#searchInput {
+    flex: 1;
+    max-width: 500px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #0e4e8f;
+    border-radius: 8px;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #fbcd19;
+    box-shadow: 0 0 8px rgba(251, 205, 25, 0.3);
+}
+
+#searchForm button {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0e4e8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'myCustomeFont', Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#searchForm button:hover {
+    background-color: #fbcd19;
+    color: #0e4e8f;
+}
+
+#searchForm button:active {
+    transform: scale(0.98);
+}
+
 /* NEWS SECTION (OUTER BOX) */
 .newsSection{
     margin: 40px auto;
@@ -138,4 +194,56 @@ main{
 
 .newsBox h2{
     margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.newsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.newsHeader h2 {
+    margin: 0;
+    flex: 1;
+}
+
+.toggleIcon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.newsPreview {
+    margin: 8px 0 0 0;
+    font-size: 14px;
+    color: #0e4e8f;
+}
+
+.newsContent {
+    display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #fbcd19;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #0e4e8f;
+}
+
+.newsBox.expanded .newsContent {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
 }
