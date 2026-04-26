@@ -13,32 +13,37 @@ body {
     min-height: 100vh;
 }
 
-#headerTop{
+#headerTop {
     display: flex;
     align-items: center;
+    justify-content: center; 
+    position: relative;
+    width: 100%;
 }
 
-.headerLeft, #logo, #userPanel{
-    flex: 1;
+.headerLeft {
+    display: none; 
 }
 
-#logo{
+#logo {
     text-align: center;
-    margin-left: 50px;
 }
 
 #logo img{
     margin: 5px;
     height: 150px;
-    width: auto;
+    max-width: 100%;
 }
 
-#userPanel{
+#userPanel {
     display: flex;
-    justify-content: flex-end;
-    gap: 40px;
-    margin-right: 80px;
-    color: #0e4e8f;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    right: 120px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color:#0e4e8f;
     font-size: 18px;
 }
 
@@ -63,6 +68,8 @@ button a:hover{
 #navBar > ul {
     display: flex;
     justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
     background-color: #0e4e8f;
     list-style: none;
     margin: 10px;
@@ -131,3 +138,82 @@ tbody tr{
     border-bottom: 1px solid #0e4e8f;
 }
 
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #logo img {
+        height: 100px;
+        width: 400px;
+    }
+    
+    #userPanel {
+        right: 40px;
+        gap: 20px;
+        font-size: 14px;
+    }
+    
+    button a {
+        font-size: 14px;
+    }
+    
+    #navBar > ul {
+        gap: 20px;
+        font-size: 14px;
+    }
+
+    main {
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #headerTop {
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    #logo img {
+        margin-top: 5px;
+        height: 90px;
+    }
+    
+    #userPanel {
+        position: static;
+        transform: none;
+        justify-content: center;
+        gap: 15px;
+        font-size: 14px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    button a {
+        font-size: 14px;
+    }
+    
+    #navBar > ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 5px;
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    #navBar ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    main {
+        font-size: 12px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}

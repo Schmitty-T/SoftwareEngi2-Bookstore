@@ -13,32 +13,37 @@ body {
     min-height: 100vh;
 }
 
-#headerTop{
+#headerTop {
     display: flex;
     align-items: center;
+    justify-content: center; 
+    position: relative;
+    width: 100%;
 }
 
-.headerLeft, #logo, #userPanel{
-    flex: 1;
+.headerLeft {
+    display: none; 
 }
 
-#logo{
+#logo {
     text-align: center;
-    margin-left: 50px;
 }
 
-#logo img{
+#logo img {
     margin: 5px;
     height: 150px;
-    width: auto;
+    max-width: 100%;
 }
 
-#userPanel{
+#userPanel {
     display: flex;
-    justify-content: flex-end;
-    gap: 40px;
-    margin-right: 80px;
-    color: #0e4e8f;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    right: 120px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color:#0e4e8f;
     font-size: 18px;
 }
 
@@ -63,6 +68,8 @@ button a:hover{
 #navBar > ul {
     display: flex;
     justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
     background-color: #0e4e8f;
     list-style: none;
     margin: 10px;
@@ -132,26 +139,31 @@ section > h3{
     color: #0e4e8f;
 }
 
-.product{
+.product {
     display: flex;
     align-items: flex-start;
     border: 1px solid #0e4e8f;
-    padding: 10px;
-    width: 20%;
+    padding: 20px;
+    width: 100%; 
+    max-width: 460px; 
+    margin: 0; 
+    gap: 20px;
 }
 
-.product{
+.productInfo{
     display: flex;
-    align-items: flex-start;
-    border: 1px solid #0e4e8f;
-    padding: 30px;
-    width: 460px;
-    margin: 10px;
+    flex-direction: column;
+    flex: 1;
 }
 
-#productResults{
-    display: flex;
-    flex-wrap: wrap;
+#productResults {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+    justify-items: center;
+    gap: 20px;
+    max-width: 1615px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .product img{
@@ -175,4 +187,142 @@ section > h3{
 
 .addCartBtn:hover{
     background-color: #0b3f74;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    
+    #logo img {
+        height: 100px;
+        width: 400px;
+    }
+    
+    #userPanel {
+        right: 40px;
+        gap: 20px;
+        font-size: 14px;
+    }
+    
+    button a {
+        font-size: 14px;
+    }
+    
+    #navBar > ul {
+        gap: 20px;
+        font-size: 14px;
+    }
+
+    #categoryMenu {
+        font-size: 14px;
+        gap: 15px;
+    }
+
+    section > h3 {
+        font-size: 14px;
+    }
+
+    #productResults {
+        justify-content: center;
+        max-width: 900px;
+    }
+    
+    .product {
+        width: 340px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #headerTop {
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    #logo img {
+        margin-top: 5px;
+        height: 90px;
+    }
+    
+    #userPanel {
+        position: static;
+        transform: none;
+        justify-content: center;
+        gap: 15px;
+        font-size: 14px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    button a {
+        font-size: 14px;
+    }
+    
+    #navBar > ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 5px;
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    #navBar ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    #categoryMenu {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin: 10px;
+        font-size: 14px;
+    }
+    
+    .category {
+        width: 100%;
+        text-align: center;
+        padding: 8px 20px;
+    }
+
+    .category {
+        display: block;
+        text-align: center;
+    }
+    
+    .category.active::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px; 
+    }
+    
+    #productResults {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product {
+        width: 90%;
+        max-width: 400px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .product img {
+        margin: 10px auto;
+    }
+    
+    .productInfo {
+        align-items: center;
+    }
+    
+    .addCartBtn {
+        align-self: center;
+    }
+    
+    section {
+        margin: 5px;
+    }
 }

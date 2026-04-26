@@ -100,7 +100,7 @@
                     <img src="<?php echo $product['image']; ?>" alt="supply image">
                 <?php endif; ?>
 
-                <div style="color: #0e4e8f;">
+                <div class= "productInfo" style="color: #0e4e8f;">
                     <p><?php echo $product['title']; ?></p>
                     <?php if($product['category'] == 'book'): ?>
                         <p>Author: <?php echo $product['author']; ?></p>
