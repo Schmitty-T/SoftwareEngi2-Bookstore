@@ -16,10 +16,30 @@ function decrease(btn){
     }
     changeTotal();
 }
-function removeItem(btn){
-    let row = btn.closest('tr');
-    row.remove();
-    changeTotal();
+function removeItem(btn, productId){
+    fetch('RemoveFromCart.php', 
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': "application/x-www-form-urlencoded",
+        },
+        body:'productId=' + encodeURIComponent(productId)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) 
+        {
+            let row = btn.closest('tr');
+            row.remove();
+            changeTotal();
+        }
+        else {
+            alert("Failed to remove item!");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });    
 }
 
 function changeTotal() {

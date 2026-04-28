@@ -78,7 +78,7 @@
                                         <input type ='number' name='quantity[<?php echo $product['productId'];?>]'
                                                value='1' min='0' class='input'>
                                         <button type='button' class='button' onclick='increase(this)'>+</button>
-                                        <button type='button' class='removeButton'  onclick='removeItem(this)'>Remove Item</button>
+                                        <button type='button' class='removeButton'  onclick='removeItem(this, <?php echo $product["productId"]; ?>)'>Remove Item</button>
                                     </td>                  
                                 </tr>
                             <?php endforeach; ?>                           
