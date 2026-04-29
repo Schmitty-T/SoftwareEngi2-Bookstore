@@ -11,7 +11,7 @@
         $priceQuery = $db->query("SELECT SUM(Products.price) AS total_price FROM OrderItems
                 INNER JOIN Products ON OrderItems.productId = Products.productId");
         $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
-        $total = $priceQuery;
+        $total = $row['total_price'] ?? 0;
 
         $stmt = $db-> prepare("SELECT userId FROM Users WHERE username = :username");
         $stmt -> execute([':username' => $username]);
