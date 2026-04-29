@@ -24,7 +24,7 @@ function encryptData($plaintext, $key) {
 
 $key = hex2bin("5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15");
 
-$stmt = $db->query("SELECT id, card_number, expiration_date, ccv FROM CreditCards");
+$stmt = $db->query("SELECT card_number, expiration_date, ccv FROM CreditCards");
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
