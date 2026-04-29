@@ -2,7 +2,19 @@
 <?php
         $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
-        $username = $_GET['username'] ?? 'Guest';        
+        $username = $_GET['username'] ?? 'Guest';  
+
+        $stmt = $db->query("SELECT * 
+                FROM OrderItems
+                INNER JOIN Products ON OrderItems.productId = Products.productId;");
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $priceQuery = $db->query("SELECT SUM(price) AS total_price FROM Products");
+        $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
+        $total = 0;
+
+        $stmt = $db-> prepare("SELECT userId FROM Users WHERE username = :username");
+        $stmt -> execute([':username' => $username]);
+        $user = $stmt -> fetch(PDO::FETCH_ASSOC);
                
                 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -18,7 +30,7 @@
             
             
             $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
-            $stmt = $db->query("SELECT * FROM CreditCards");
+            $stmt = $db->query("SELECT * FROM CreditCards");            
 
             $valid = false;
 
@@ -38,6 +50,24 @@
                     }
             }
             if($valid) {
+
+                $ordNum = 'ON-' . date('Ymd') . '-' . mt_rand(1000,9999);
+
+                $stmt = $db -> prepare("
+                INSERT INTO Orders
+                (userId, confNum, orderDate, total, status)
+                VALUES
+                (:user, :ordNum, :timeStamp, :total, :status)");
+
+                $stmt -> execute([ 
+                    ':user' => $user['userId'],
+                    ':ordNum' => $ordNum,
+                    ':timeStamp' => date('Y-m-d H:i:s'),
+                    ':total' => $total,
+                    ':status' => 'Ordered'
+                ]);
+
+
                 echo "<script>window.onload = function() {successPopup('categories.php?username=" . urlencode($username) . "'); };</script>";
             } else {
                 echo"<script>window.onload = function() {errorPopup(); };</script>";
@@ -62,9 +92,7 @@
                 $iv,
                 $tag
             );
-        }        
-                 
-           
+        }          
       
 ?>
 
