@@ -2,16 +2,12 @@
 <?php
         $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
-        $username = $_GET['username'] ?? 'Guest';
-        $stmt = $db->query("SELECT * FROM Products");
-        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $priceQuery = $db->query("SELECT SUM(price) AS total_price FROM Products");
-        $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
-        $total = 0;
-        
+        $username = $_GET['username'] ?? 'Guest';        
+               
+                
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $card_number = $_POST['card_number'];
-            $expiration_date = $_POST['expiration_date'];
+            $card_number = str_replace('-','',$_POST['card_number']);
+            $exp_date = $_POST['exp_date'];
             $ccv = $_POST['ccv'];
             $first_name = $_POST['first_name'];
             $last_name = $_POST['last_name'];
@@ -19,41 +15,56 @@
             $street_address = $_POST['street_address'];
             $state = $_POST['state'];
             $city = $_POST['city'];
+        }
+        $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
+        function decryptData($encryption, $key) {
+            $cipher = 'aes-256-gcm';
 
+            $data = base64_decode($encryption);
+
+            $ivlength = openssl_cipher_iv_length($cipher);
+            $iv = substr($data, 0, $ivLength);
+            $tag = substr($data, $ivLength, 16);
+            $ciphertext = substr($data, ivLength + 16);
+
+
+            return openssl_decrypt(
+                $ciphertext,
+                $cipher,
+                $key,
+                OPENSSL_RAW_DATA,
+                $iv,
+                $tag
+            );
+        }
+
+        $stmt = $db->query("SELECT * FROM CreditCards");
+
+        $valid = false;
+
+        while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+            $card = decryptData($row['card_number'], $key);
+            $exp = decryptData($row['exp_date'], $key);
+            $ccv_check = decryptData($row['ccv'], $key);
+
+            $card = str_replace('-', '',$card);
+
+            if($card === $card_number &&
+                $exp === $exp_date &&
+                $ccv_check === $ccv)
+                {
+                    $valid = true;
+                    break;
+                }
+        }
+        if($valid) {
+            echo "<script>window.onload = function() {successPopup(); };</script>";
+        } else {
+            echo"<script>window.onload = function() {errorPopup(); };</script>";
+        }
             
 
-            $statement = $db->prepare(
-                    "SELECT * 
-                     FROM CreditCards
-                     WHERE card_number = :card_number
-                     AND ccv = :ccv
-                     AND expiration_date = :expiration_date"
-                    );
-
-            $statement->bindValue(':card_number', $card_number,PDO::PARAM_STR );
-            $statement->bindValue(':expiration_date', $expiration_date,PDO::PARAM_STR);
-            $statement->bindValue(':ccv', $ccv, );
-            //$statement->bindValue(':first_name', $first_name,PDO::PARAM_STR );
-            //$statement->bindValue(':last_name', $last_name, PDO::PARAM_STR);
-            //$statement->bindValue(':zip_code', $zip_code, PDO::PARAM_STR);
-            //$statement->bindValue(':street_address', $street_address,PDO::PARAM_STR);
-            //$statement->bindValue(':state', $state,PDO::PARAM_STR);
-            //$statement->bindValue(':city', $city,PDO::PARAM_STR);
-
-            $statement->execute();
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-            if($row) {
-                echo "<script>window.onload = function () {
-                successPopup();};</script>";
-            }else{
-                echo "<script>
-                window.onload = function() {
-                    errorPopup();
-                };    
-                </script>;";
-            }
-        }
+           
       
 ?>
 
