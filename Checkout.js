@@ -281,8 +281,8 @@ cardNumberInput.addEventListener("input", function (e) {
     
     e.target.value = value;
 });
-function successPopup(redirectUrl) {
-    alert(" Congratulations, your purchase has been processed and your payment method was successful!!");
+function successPopup(popup, redirectUrl) {
+    alert("Congrats, your order was processed\nConfirmation Number: " + popup);
     window.location.href=redirectUrl;
 }
 function errorPopup() {

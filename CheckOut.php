@@ -69,7 +69,8 @@
                 ]);
 
 
-                echo "<script>window.onload = function() {successPopup('categories.php?username=" . urlencode($username) . "'); };</script>";
+                echo "<script>window.onload = function() {successPopup(
+                      '$ordNum','categories.php?username=" . urlencode($username) . "'); };</script>";
             } else {
                 echo"<script>window.onload = function() {errorPopup(); };</script>";
         }
