@@ -8,9 +8,10 @@
                 FROM OrderItems
                 INNER JOIN Products ON OrderItems.productId = Products.productId;");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $priceQuery = $db->query("SELECT SUM(price) AS total_price FROM Products");
+        $priceQuery = $db->query("SELECT SUM(Products.price) AS total_price FROM OrderItems
+                INNER JOIN Products ON OrderItems.productId = Products.productId");
         $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
-        $total = 0;
+        $total = $priceQuery;
 
         $stmt = $db-> prepare("SELECT userId FROM Users WHERE username = :username");
         $stmt -> execute([':username' => $username]);
