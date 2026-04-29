@@ -281,9 +281,9 @@ cardNumberInput.addEventListener("input", function (e) {
     
     e.target.value = value;
 });
-function successPopup() {
+function successPopup(redirectUrl) {
     alert(" Congratulations, your purchase has been processed and your payment method was successful!!");
-    window.location.href='categories.php';
+    window.location.href=redirectUrl;
 }
 function errorPopup() {
     alert("The Card Information You have Entered Is Invalid");

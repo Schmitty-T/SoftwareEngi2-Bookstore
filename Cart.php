@@ -100,7 +100,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="CheckoutButton" type ="button" onclick ="window.location.href = 'checkout.php'">
+                        <button class="CheckoutButton" type ="button" onclick ="window.location.href = 'checkout.php?username=<?php echo urlencode($username)?>'">
                              Check Out       
                     </button>
                 </form>

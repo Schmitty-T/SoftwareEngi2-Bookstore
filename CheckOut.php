@@ -15,17 +15,43 @@
             $street_address = $_POST['street_address'];
             $state = $_POST['state'];
             $city = $_POST['city'];
+            
+            
+            $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
+            $stmt = $db->query("SELECT * FROM CreditCards");
+
+            $valid = false;
+
+            while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+                $card = decryptData($row['card_number'], $key);
+                $exp = decryptData($row['exp_date'], $key);
+                $ccv_check = decryptData($row['ccv'], $key);
+
+                $card = str_replace('-', '',$card);
+
+                if($card === $card_number &&
+                    $exp === $exp_date &&
+                    $ccv_check === $ccv)
+                    {
+                        $valid = true;
+                        break;
+                    }
+            }
+            if($valid) {
+                echo "<script>window.onload = function() {successPopup('categories.php?username=" . urlencode($username) . "'); };</script>";
+            } else {
+                echo"<script>window.onload = function() {errorPopup(); };</script>";
         }
-        $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
+        }
         function decryptData($encryption, $key) {
             $cipher = 'aes-256-gcm';
 
             $data = base64_decode($encryption);
 
-            $ivlength = openssl_cipher_iv_length($cipher);
+            $ivLength = openssl_cipher_iv_length($cipher);
             $iv = substr($data, 0, $ivLength);
             $tag = substr($data, $ivLength, 16);
-            $ciphertext = substr($data, ivLength + 16);
+            $ciphertext = substr($data, $ivLength + 16);
 
 
             return openssl_decrypt(
@@ -36,34 +62,8 @@
                 $iv,
                 $tag
             );
-        }
-
-        $stmt = $db->query("SELECT * FROM CreditCards");
-
-        $valid = false;
-
-        while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-            $card = decryptData($row['card_number'], $key);
-            $exp = decryptData($row['exp_date'], $key);
-            $ccv_check = decryptData($row['ccv'], $key);
-
-            $card = str_replace('-', '',$card);
-
-            if($card === $card_number &&
-                $exp === $exp_date &&
-                $ccv_check === $ccv)
-                {
-                    $valid = true;
-                    break;
-                }
-        }
-        if($valid) {
-            echo "<script>window.onload = function() {successPopup(); };</script>";
-        } else {
-            echo"<script>window.onload = function() {errorPopup(); };</script>";
-        }
-            
-
+        }        
+                 
            
       
 ?>
@@ -99,7 +99,7 @@
         </header>
         
         <main>
-            <form method = "POST" action = "checkout.php">
+            <form method = "POST" action = "checkout.php?username=<?php echo urlencode($username);?>">
             <div class="CartItemsContainer">                
                 <table class="CartItemsTable">
                     <thead>
@@ -139,7 +139,7 @@
                                 </tr>
                                 <tr>                            
                                     <td colspan="2">                                
-                                        <input  id='expiration' type="text" maxlength='10' name='expiration_date' placeholder="Expiration YY-MMM eg:29-Mar" required>                                
+                                        <input  id='expiration' type="text" maxlength='10' name='exp_date' placeholder="Expiration eg:11/28" required>                                
                                     </td>                                    
                                 </tr>
                                 <tr>                            
