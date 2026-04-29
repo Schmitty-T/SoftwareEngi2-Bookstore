@@ -92,7 +92,7 @@ $encrypted_ccv = encryptData($ccv, $key);
 $stmt = $db->prepare("
     INSERT INTO CreditCards (
         card_number,
-        expiration_date,
+        exp_date,
         ccv
        
     ) VALUES (
@@ -119,6 +119,6 @@ $check = $db->query("SELECT * FROM CreditCards ORDER BY id DESC LIMIT 1");
 $row = $check->fetch(PDO::FETCH_ASSOC);
 
 echo "Decrypted Card: " . decryptData($row['card_number'], $key) . "<br>";
-echo "Decrypted Expiration: " . decryptData($row['expiration_date'], $key) . "<br>";
+echo "Decrypted Expiration: " . decryptData($row['exp_date'], $key) . "<br>";
 echo "Decrypted CCV: " . decryptData($row['ccv'], $key) . "<br>";
 ?>
