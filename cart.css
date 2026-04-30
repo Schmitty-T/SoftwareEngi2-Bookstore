@@ -186,6 +186,86 @@ tr th{
     color:yellow;
 }
 
+@media (max-width: 1024px) {
+    #logo {
+        margin-left: 20px;
+    }
+    #userPanel {
+        margin-right: 20px;
+        gap: 20px;
+    }
+    .CartItemsContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .CartItemsTable, .CartItemsSumTable {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    td img {
+        width: 80px;
+    }
+}
+
+@media (max-width: 768px){
+    #headerTop {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #logo {
+        margin-left: 0;
+    }
+
+    #logo img {
+        height: 100px;
+    }
+
+    #userPanel {
+        justify-content: center;
+        margin-right:0;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    #navBar > ul {
+        flex-direction: column; 
+        align-items: center;
+        gap: 10px;
+    }
+
+    .CartItemsContainer {
+        flex-direction: column;
+    }
+
+    .CartItemsTable, .CartItemsSumTable {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .quantity {
+        justify-content: center;
+    }
+
+    .button{
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .input {
+        width: 45px;
+    }
+
+    .CheckoutButton {
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
 
 
 

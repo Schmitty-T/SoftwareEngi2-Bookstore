@@ -232,4 +232,63 @@ tr th{
   color: rgba(0, 0, 0, 0.6);
 }
 
+@media (max-width: 1024px) {
+    #userpanel{
+        gap: 20px;
+        margin-right: 20px;
+    }
+
+    #logo img{
+        height:120px;
+    }
+    .CartItemsContainer {
+        flex-direction: column;
+    }
+    .CartItemsTable, .CartItemsSumTable{
+        width: 100%;
+    }
+}
+@media (max-width: 768px;) {
+    body{
+        font-size: 14px;
+    }
+
+    #headerTop {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #logo {
+        margin-left: 0;
+    }
+
+    #userPanel {
+        justify-content: center;
+        margin-right: 0;
+        gap: 15px;
+    }
+
+    #navbar > ul {
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+    }
+
+    .CartItemsContainer {
+        flex-direction: column;
+    }
+    .CartItemsTable, .CartItemsSumTable {
+        width:100%;
+        margin-left: 0;
+    }
+
+    td img {
+        width:70px;
+    }
+    .CheckoutButton {
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
 
