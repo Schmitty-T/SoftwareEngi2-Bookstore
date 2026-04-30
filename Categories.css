@@ -172,6 +172,13 @@ section > h3{
     margin:20px;
 }
 
+.addCartContainer{
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+}
+
+
 .addCartBtn{
     display: inline-block;
     margin-top: 15px;
