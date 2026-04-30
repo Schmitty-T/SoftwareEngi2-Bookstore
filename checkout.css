@@ -233,7 +233,7 @@ tr th{
 }
 
 @media (max-width: 1024px) {
-    #userpanel{
+    #userPanel{
         gap: 20px;
         margin-right: 20px;
     }
@@ -248,7 +248,7 @@ tr th{
         width: 100%;
     }
 }
-@media (max-width: 768px;) {
+@media (max-width: 768px) {
     body{
         font-size: 14px;
     }
@@ -261,21 +261,30 @@ tr th{
     #logo {
         margin-left: 0;
     }
+    #logo img{
+        height:90px;
+    }
 
     #userPanel {
         justify-content: center;
-        margin-right: 0;
+        margin-right: 0px;
+        flex-wrap:wrap;
         gap: 15px;
     }
-
-    #navbar > ul {
-        flex-direction: column;
+    
+    #navBar > ul {
+        flex-direction: column; 
         align-items: center;
-        gap:10px;
+        gap: 20px;
+        margin-right: 0px;
+        margin-left:0px;
+        width: 100%;
     }
 
     .CartItemsContainer {
         flex-direction: column;
+        margin-left:10px;
+        margin-bottom: 10px;
     }
     .CartItemsTable, .CartItemsSumTable {
         width:100%;
@@ -286,8 +295,37 @@ tr th{
         width:70px;
     }
     .CheckoutButton {
-        height: 50px;
+        height: 60px;
         font-size: 16px;
+    }
+}
+
+@media (max-width: 480px){
+    body {
+        font-size: 14px;
+    }
+    
+    #logo img {
+        height:80px;
+    }
+    
+    button a{
+        font-size: 14px;
+    }
+    
+    .CartItemsTable
+    {
+        font-size: 14px;
+        width:100%;
+    }
+    
+    td img {
+        width:60px;
+    }
+    
+    .quantity{
+        flex-direction: column;
+        gap: 5px;
     }
 }
 
