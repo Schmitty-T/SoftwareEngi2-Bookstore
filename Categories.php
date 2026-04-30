@@ -108,11 +108,13 @@
                     <?php endif; ?>
 
                     <p>$<?php echo $product['price']; ?></p>
-                    <a href="addToCart.php?productId=<?php echo $product['productId']; ?>
-                    &username=<?php echo urlencode($username); ?>" class="addCartBtn">
-                    Add to Cart
-                    </a>                
-        </div>
+                    <div class="addCartContainer">
+                        <a href="addToCart.php?productId=<?php echo $product['productId']; ?>
+                        &username=<?php echo urlencode($username); ?>" class="addCartBtn">
+                            Add to Cart
+                        </a>
+                    </div>
+                </div>
             </article>
                 <?php endforeach; ?>
         </div>
