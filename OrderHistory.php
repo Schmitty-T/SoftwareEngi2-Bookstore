@@ -14,10 +14,14 @@
     $stmt->execute([$userId]);
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-     if(!$userId) {
-        $stmtOrders = $db->prepare("SELECT * FROM Orders WHERE userId = ? AND status = 'completed'");
-        $stmtOrders->execute([$userId]);
-        $orders = $stmtOrders->fetchAll(PDO::FETCH_ASSOC);
+     if($userId) {
+        $stmt = $db->prepare("
+                SELECT * FROM Orders 
+                WHERE userId = ? AND status = 'Ordered'
+                ORDER BY orderDate DESC
+            ");
+            $stmt->execute([$userId]);
+            $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
         $orders = [];
     }
@@ -70,7 +74,7 @@
                     <?php if (count($orders) > 0): ?>
                         <?php foreach ($orders as $order): ?>
                             <tr>
-                                <td><?= $order['orderId']?></td>
+                                <td><?= $order['confNum']?></td>
                                 <td><?= $order['orderDate']?></td>
                                 <td>$<?= number_format($order['total'], 2) ?></td>
                                 <td><?= $order['status']?></td>
