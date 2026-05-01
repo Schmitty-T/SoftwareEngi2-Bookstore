@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+        date_default_timezone_set('America/Chicago');
         $db = new PDO("sqlite:bookstore.db");
         $category = $_GET['category'] ?? null;
         $username = $_GET['username'] ?? 'Guest';  
