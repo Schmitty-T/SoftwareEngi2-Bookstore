@@ -32,7 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $card_number = str_replace('-','',$_POST['card_number']);
     $exp_date = $_POST['exp_date'];
-    $ccv = $_POST['ccv'];           
+    $ccv = $_POST['ccv'];    
+    
+    $stmt = $db->prepare("
+    SELECT orderId FROM Orders
+    WHERE userId = ?
+    AND status = 'cart'
+    ");
+    $stmt->execute([$userId]);
+    $cart = $stmt->fetch(PDO::FETCH_ASSOC);
             
     $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
     $stmt = $db->query("SELECT * FROM CreditCards");            
@@ -55,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-    if ($valid) {
+    if ($valid && $cart) {
 
         $orderId = $cart['orderId'];
 
