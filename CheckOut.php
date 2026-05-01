@@ -1,82 +1,92 @@
 <!DOCTYPE html>
 <?php
-        date_default_timezone_set('America/Chicago');
-        $db = new PDO("sqlite:bookstore.db");
-        $category = $_GET['category'] ?? null;
-        $username = $_GET['username'] ?? 'Guest';  
+date_default_timezone_set('America/Chicago');
+$db = new PDO("sqlite:bookstore.db");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $db->query("SELECT * 
-                FROM OrderItems
-                INNER JOIN Products ON OrderItems.productId = Products.productId;");
-        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $priceQuery = $db->query("SELECT SUM(Products.price) AS total_price FROM OrderItems
-                INNER JOIN Products ON OrderItems.productId = Products.productId");
-        $row = $priceQuery->fetch(PDO::FETCH_ASSOC);
-        $total = $row['total_price'] ?? 0;
+$username = $_GET['username'] ?? 'Guest';
 
-        $stmt = $db-> prepare("SELECT userId FROM Users WHERE username = :username");
-        $stmt -> execute([':username' => $username]);
-        $user = $stmt -> fetch(PDO::FETCH_ASSOC);
-               
-                
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $card_number = str_replace('-','',$_POST['card_number']);
-            $exp_date = $_POST['exp_date'];
-            $ccv = $_POST['ccv'];
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $zip_code = $_POST['zip_code'];
-            $street_address = $_POST['street_address'];
-            $state = $_POST['state'];
-            $city = $_POST['city'];
+$stmt = $db->prepare("SELECT userId FROM Users WHERE username = ?");
+$stmt->execute([$username]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$userId = $user['userId'] ?? null;
+
+$total = 0;
+
+$stmt = $db->prepare("
+    SELECT Products.price, OrderItems.quantity
+    FROM OrderItems
+    INNER JOIN Products ON OrderItems.productId = Products.productId
+    INNER JOIN Orders ON OrderItems.orderId = Orders.orderId
+    WHERE Orders.userId = ?
+    AND Orders.status = 'cart'
+");
+$stmt->execute([$userId]);
+$items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($items as $item) {
+    $total += $item['price'] * ($item['quantity'] ?? 1);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $card_number = str_replace('-','',$_POST['card_number']);
+    $exp_date = $_POST['exp_date'];
+    $ccv = $_POST['ccv'];           
             
-            
-            $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
-            $stmt = $db->query("SELECT * FROM CreditCards");            
+    $key = hex2bin('5b3b99abd78f5972984cf9d5fbf2049d945f715838eb34ac8be95f735fa2ce15');
+    $stmt = $db->query("SELECT * FROM CreditCards");            
 
-            $valid = false;
+    $valid = false;
+    
+    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+        $card = decryptData($row['card_number'], $key);
+        $exp = decryptData($row['exp_date'], $key);
+        $ccv_check = decryptData($row['ccv'], $key);
 
-            while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-                $card = decryptData($row['card_number'], $key);
-                $exp = decryptData($row['exp_date'], $key);
-                $ccv_check = decryptData($row['ccv'], $key);
+        $card = str_replace('-', '',$card);
 
-                $card = str_replace('-', '',$card);
-
-                if($card === $card_number &&
-                    $exp === $exp_date &&
-                    $ccv_check === $ccv)
-                    {
-                        $valid = true;
-                        break;
-                    }
+        if($card === $card_number &&
+            $exp === $exp_date &&
+            $ccv_check === $ccv)
+                {
+                    $valid = true;
+                    break;
+                }
             }
-            if($valid) {
 
-                $ordNum = 'ON-' . date('Ymd') . '-' . mt_rand(1000,9999);
+    if ($valid) {
 
-                $stmt = $db -> prepare("
-                INSERT INTO Orders
-                (userId, confNum, orderDate, total, status)
-                VALUES
-                (:user, :ordNum, :timeStamp, :total, :status)");
+        $orderId = $cart['orderId'];
 
-                $stmt -> execute([ 
-                    ':user' => $user['userId'],
-                    ':ordNum' => $ordNum,
-                    ':timeStamp' => date('Y-m-d H:i:s'),
-                    ':total' => $total,
-                    ':status' => 'Ordered'
-                ]);
+        $ordNum = 'ON-' . date('Ymd') . '-' . mt_rand(1000,9999);
 
+        $stmt = $db->prepare("
+            UPDATE Orders
+            SET status = 'Ordered',
+                confNum = ?,
+                orderDate = ?,
+                total = ?
+            WHERE orderId = ?
+        ");
 
-                echo "<script>window.onload = function() {successPopup(
-                      '$ordNum','categories.php?username=" . urlencode($username) . "'); };</script>";
-            } else {
-                echo"<script>window.onload = function() {errorPopup(); };</script>";
-        }
-        }
-        function decryptData($encryption, $key) {
+        $stmt->execute([
+            $ordNum,
+            date('Y-m-d H:i:s'),
+            $total,
+            $orderId
+        ]);
+
+        echo "<script>
+            alert('Order placed! Confirmation: $ordNum');
+            window.location.href = 'Categories.php?username=" . urlencode($username) . "';
+        </script>";
+
+    } else {
+        echo "<script>alert('Invalid Card Details!');</script>";
+    }
+    }
+    function decryptData($encryption, $key) {
             $cipher = 'aes-256-gcm';
 
             $data = base64_decode($encryption);
@@ -95,8 +105,7 @@
                 $iv,
                 $tag
             );
-        }          
-      
+    }
 ?>
 
 
