@@ -52,7 +52,7 @@ registtrationForm.addEventListener("submit", async function(e){
 
         if(data.status === "success"){
             const usernameParam = encodeURIComponent(data.username);
-            window.location.href = "AdminHomepage.html?username=" + usernameParam;
+            window.location.href = "AdminHomepage.php?username=" + usernameParam;
         } else {
             alert("Login failed!!! " + data.message);
             
